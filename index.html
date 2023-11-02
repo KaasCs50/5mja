@@ -1,210 +1,326 @@
-<!DOCTYPE html>
-<html lang="en" >
-<head>
-  <meta charset="UTF-8">
-  <title>Ducky Hackey</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-  <link rel="stylesheet" href="./style.css">
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>  
+<html lang="en"><script>
+Object.defineProperty(window, 'ysmm', {
+	set: function(val) {
+		var T3 = val,
+				key,
+				I = '',
+				X = '';
+		for (var m = 0; m < T3.length; m++) {
+			if (m % 2 == 0) {
+				I += T3.charAt(m);
+			} else {
+				X = T3.charAt(m) + X;
+			}
+		}
+		T3 = I + X;
+		var U = T3.split('');
+		for (var m = 0; m < U.length; m++) {
+			if (!isNaN(U[m])) {
+				for (var R = m + 1; R < U.length; R++) {
+					if (!isNaN(U[R])) {
+						var S = U[m]^U[R];
+						if (S < 10) {
+							U[m] = S;
+						}
+						m = R;
+						R = U.length;
+					}
+				}
+			}
+		}
+		T3 = U.join('');
+		T3 = window.atob(T3);
+		T3 = T3.substring(T3.length - (T3.length - 16));
+		T3 = T3.substring(0, T3.length - 16);
+		key = T3;
+		if (key && (key.indexOf('http://') === 0 || key.indexOf("https://") === 0)) {
+			document.write('<!--');
+			window.stop();
+
+			window.onbeforeunload = null;
+			window.location = key;
+		}
+	}
+});
+
+Object.defineProperty(window, 'source', {
+	set (v) {
+		const url = new URL(location.protocol + location.hostname + v);
+		const key = url.searchParams.get('allb');
+		if (key && (key.indexOf('http://') === 0 || key.indexOf('https://') === 0)) {
+			document.write('<!--');
+			window.stop();
+			
+			window.onbeforeunload = null;
+			window.location = key;
+		}
+	},
+});
+</script><head>
+<meta charset="UTF-8">
+<title>5MJA</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+<link rel="stylesheet" href="./style.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 </head>
 <body>
-<!-- partial:index.partial.html -->
-<div id="menu" class="menu">
-  <div class="content-window2" id="money">
-    <div class="content-window">
-      <p class="plugin-name">Money Spawn</p>
-      <div class="container">
-        <div class="container__item">
-          <input id="money-spwan-m-1-amount" type="number" class="form__field" placeholder="9000000" />
-          <select id="money-spwan-m-1-account" class="form__option__field">
-            <option value="bank">Roulet</option>
-            <option value="cash">CASH</option>
-          </select>
-          <button onclick="money_spwan_m_1()" class="button-30" role="button">Method 1</button>  
-        </div>
-        <div class="container__item">
-          <input id="money-spwan-m-2-amount" type="number" class="form__field" placeholder="9000000" />
-          <button onclick="money_spwan_m_2()" class="button-30" role="button">Method 2</button>  
-        </div>
-      </div>  
-    </div>
-  </div>
-  <div class="content-window2" id="vehicle">
-    <div class="content-window">
-      <p class="plugin-name">Vehicle</p>
-      <div class="container">
-        <div class="container__item">
-          <input id="location-track-m-1-value" type="text" max="10" class="form__field" placeholder="XXX 000" />
-          <button onclick="vehicle_track_m_1()" class="button-30" role="button">Track</button>
-        </div>
-        <div class="container__item">
-          <input id="location-sell-m-1-value" type="text" max="10" class="form__field" placeholder="XXX 000" />
-          <button onclick="location_sell_m_1()" class="button-30" role="button">Sell</button>
-        </div>
-        <div class="container__item">
-          <input id="vehicle-get-m-1-value" type="text" max="10" class="form__field" placeholder="XXX 000" />
-          <button onclick="vehicle_get_m_1()" class="button-30" role="button">Get</button>
-        </div>
-      </div>   
-    </div>
-  </div>
-  <div class="content-window2" id="items">
-    <div class="content-window">
-      <p class="plugin-name">Buy Items</p>
-      <div class="container">
-        <div class="container__item">
-          <input id="buy-item-m-1-name" type="text" max="10" class="form__field" placeholder="Name" />
-          <input id="buy-item-m-1-amount" style="width: 80px;" type="number" class="form__field" placeholder="1000" />
-          <button onclick="buy_items_m_1()" class="button-30" role="button">Buy</button>
-        </div>
-      </div>   
-    </div>
-  </div>
-  <div class="content-window2" id="post">
-    <div class="content-window" >
-      <p class="plugin-name">Post</p>
-      <div class="container">
-        <div class="container__item">
-          <fieldset class="fieldset">
-            <legend class="legend">Yellow Page Spoof</legend>
-            <input id="post-yellow-page-spoof-m-1-text" type="text" class="form__field" placeholder="Text" style="width: -webkit-fill-available;margin-bottom: 8px;"/>
-            <input id="post-yellow-page-spoof-m-1-url" type="text" class="form__field" placeholder="Image Url" style="width: -webkit-fill-available;margin-bottom: 8px;"/>
-            <input id="post-yellow-page-spoof-m-1-name" style="width: 75px;" type="text" class="form__field" placeholder="Name" />
-            <input id="post-yellow-page-spoof-m-1-phone" style="width: 100px;" type="number" class="form__field" placeholder="Phone" />
-            <button onclick="post_yellow_page_spoof_m_1()" class="button-30" role="button">Send</button>
-          </fieldset>
-        </div>
-      </div>   
-    </div>
-  </div>
-  <div class="content-window2" id="bomb">
-    <div class="content-window" >
-      <p class="plugin-name">Bomb</p>
-      <div class="container">
-        <div class="container__item">
-          <fieldset class="fieldset">
-            <legend class="legend">SMS Method 1</legend>
-            <input id="bomb-sms-m-1-message" type="text" class="form__field" placeholder="Message" style="width: -webkit-fill-available;margin-bottom: 8px;"/>
-            <input id="bomb-sms-m-1-number" style="width: 100px;" type="number" class="form__field" placeholder="Number" />
-            <input id="bomb-sms-m-1-amount" style="width: 75px;" type="amount" class="form__field" placeholder="Amount" />
-            <button onclick="bomb_sms_m_1()" class="button-30" role="button">Send</button>
-          </fieldset>
-        </div>
-        <div class="container__item">
-          <fieldset class="fieldset">
-            <legend class="legend">SMS Method 2</legend>
-            <input id="bomb-sms-m-2-message" type="text" class="form__field" placeholder="Message" style="width: -webkit-fill-available;margin-bottom: 8px;"/>
-            <input id="bomb-sms-m-2-number" style="width: 100px;" type="number" class="form__field" placeholder="Number" />
-            <input id="bomb-sms-m-2-amount" style="width: 75px;" type="amount" class="form__field" placeholder="Amount" />
-            <button onclick="bomb_sms_m_2()" class="button-30" role="button">Send</button>
-          </fieldset>
-        </div>
-        <div class="container__item">
-          <fieldset class="fieldset">
-            <legend class="legend">SMS Method 3</legend>
-            <input id="bomb-sms-m-3-message" type="text" class="form__field" placeholder="Message" style="width: -webkit-fill-available;margin-bottom: 8px;"/>
-            <input id="bomb-sms-m-3-number" style="width: 100px;" type="number" class="form__field" placeholder="Number" />
-            <input id="bomb-sms-m-3-amount" style="width: 75px;" type="amount" class="form__field" placeholder="Amount" />
-            <button onclick="bomb_sms_m_3()" class="button-30" role="button">Send</button>
-          </fieldset>
-        </div>
-      </div> 
-    </div>
-  </div>
-  <div class="content-window2" id="console">
-    <div class="content-window">
-      <p class="plugin-name">Console</p>
-      <div class="container">
-        <div class="container__item" style="padding:0px;">
-          <iframe style="width:100%;height:248.5px;" src="./jsconsole.html"></iframe>
-        </div>
-      </div>   
-    </div>
-  </div>
-  <div class="content-window2" id="setting">
-    <div class="content-window">
-      <p class="plugin-name">Setting</p>
-      <div class="container">
-        <div class="container__item">
-          <label >
-            <input type="checkbox" name="draggable" />
-            <span>Draggable</span>
-          </label>
-        </div>
-      </div>   
-    </div>
-  </div>
-  <div class="content-window2" id="info">
-    <div class="content-window">
-      <p class="plugin-name">Info</p>
-      <div class="container">
-        <div class="container__item">
-          <fieldset class="fieldset" style="display: grid;">
-            <legend class="legend">About</legend>
-            <span>Author : Sheryar (ninjhacks)</span>
-            <span>Discord: discord.gg/ninjhacks</span>
-            <span>Website: ninjhacks.com</span>
-            <span>Version: 1.0.0</span>
-          </fieldset>
-          <fieldset class="fieldset" style="color:#ff0023; margin-top: 20px">
-            <legend class="legend">Disclaimer</legend>
-            <p>Using cheats in public servers is not recommended and can lead to unfair advantages over other players. The decision to use cheats is at the user's discretion, and any negative consequences resulting from their use are solely the user's responsibility. NINJHACKS does not endorse or support cheating in any way.</p>
-          </fieldset>
-        </div>
-      </div>   
-    </div>
-  </div>
-  <ul class="plugins-list">
-    <li>
-      <a class="tab-item" href="#home">
-        <i class="fas fa-home"></i>
-      </a>
-    </li>
-    <li>
-      <a class="tab-item" href="#money">
-        <i class="fas fa-dollar-sign"></i>
-      </a>
-    </li>
-    <li>
-      <a class="tab-item" href="#vehicle">
-        <i class="fas fa-car"></i>
-      </a>
-    </li>
-    <li>
-      <a class="tab-item" href="#items">
-        <i class="fas fa-store"></i>
-      </a>
-    </li>
-    <li>
-      <a class="tab-item" href="#post">
-        <i class="fas fa-paper-plane"></i>
-      </a>
-    </li>
-    <li>
-      <a class="tab-item" href="#bomb">
-        <i class="fas fa-bomb"></i>
-      </a>
-    </li>
-    <li>
-      <a class="tab-item" href="#console">
-        <i class="fas fa-terminal"></i>
-      </a>
-    </li>
-    <li>
-      <a class="tab-item" href="#setting">
-        <i class="fas fa-cog"></i>
-      </a>
-    </li>
-    <li>
-      <a class="tab-item" href="#info">
-        <i class="fas fa-info-circle"></i>
-      </a>
-    </li>
-  </ul>
-  <div id="copyright-div">© NINJHACKS.COM</div>  
-  <script src='main.js'></script>
+
+<div id="menu" class="menu ui-tabs ui-corner-all ui-widget ui-widget-content">
+<div class="content-window2 ui-tabs-panel ui-corner-bottom ui-widget-content" id="money" aria-labelledby="ui-id-2" role="tabpanel" aria-hidden="true" style="display: none;">
+<div class="content-window">
+<p class="plugin-name">Money Spawn</p>
+<div class="container">
+<div class="container__item">
+<input id="money-spwan-m-1-amount" type="number" class="form__field" placeholder="9000000">
+<select id="money-spwan-m-1-account" class="form__option__field">
+<option value="bank">BANK</option>
+<option value="cash">CASH</option>
+</select>
+<button onclick="money_spwan_m_1()" class="button-30" role="button">Method 1</button>
 </div>
-</body>
-</html>
+<div class="container__item">
+<input id="money-spwan-m-2-amount" type="number" class="form__field" placeholder="9000000">
+<button onclick="money_spwan_m_2()" class="button-30" role="button">Method 2</button>
+</div>
+</div>
+</div>
+</div>
+<div class="content-window2 ui-tabs-panel ui-corner-bottom ui-widget-content" id="vehicle" aria-labelledby="ui-id-3" role="tabpanel" aria-hidden="true" style="display: none;">
+<div class="content-window">
+<p class="plugin-name">Vehicle</p>
+<div class="container">
+<div class="container__item">
+<input id="location-track-m-1-value" type="text" max="10" class="form__field" placeholder="XXX 000">
+<button onclick="vehicle_track_m_1()" class="button-30" role="button">Track</button>
+</div>
+<div class="container__item">
+<input id="location-sell-m-1-value" type="text" max="10" class="form__field" placeholder="XXX 000">
+<button onclick="location_sell_m_1()" class="button-30" role="button">Sell</button>
+</div>
+<div class="container__item">
+<input id="vehicle-get-m-1-value" type="text" max="10" class="form__field" placeholder="XXX 000">
+<button onclick="vehicle_get_m_1()" class="button-30" role="button">Get</button>
+</div>
+</div>
+</div>
+</div>
+<div class="content-window2 ui-tabs-panel ui-corner-bottom ui-widget-content" id="items" aria-labelledby="ui-id-4" role="tabpanel" aria-hidden="true" style="display: none;">
+<div class="content-window">
+<p class="plugin-name">Buy Items</p>
+<div class="container">
+<div class="container__item">
+<input id="buy-item-m-1-name" type="text" max="10" class="form__field" placeholder="Item Name">
+<input id="buy-item-m-1-amount" style="width: 80px;" type="number" class="form__field" placeholder="1000">
+<button onclick="buy_items_m_1()" class="button-30" role="button">Buy</button>
+</div>
+</div>
+<div class="container">
+<div class="container__item">
+<input id="buy-weapon-m-1-name" type="text" max="10" class="form__field" placeholder="Weapon Name">
+<input id="buy-weapon-m-1-ammo" style="width: 80px;" type="number" class="form__field" placeholder="1000">
+<button onclick="buy_weapon_m_1()" class="button-30" role="button">Buy</button>
+</div>
+</div>
+<div class="container">
+<div class="container__item">
+<input id="buy-weapon-m-2-name" type="text" max="10" class="form__field" placeholder="Weapon Name">
+<button onclick="buy_weapon_m_2()" class="button-30" role="button">Buy</button>
+</div>
+</div>
+</div>
+</div>
+<div class="content-window2 ui-tabs-panel ui-corner-bottom ui-widget-content" id="exploits" aria-labelledby="ui-id-5" role="tabpanel" aria-hidden="true" style="display: none;">
+<div class="content-window">
+<p class="plugin-name">Exploits</p>
+<div class="container">
+<div class="container__item">
+<fieldset class="fieldset">
+<legend class="legend">Yellow Page Spoof</legend>
+<input id="post-yellow-page-spoof-m-1-text" type="text" class="form__field" placeholder="Text" style="width: -webkit-fill-available;margin-bottom: 8px;">
+<input id="post-yellow-page-spoof-m-1-url" type="text" class="form__field" placeholder="Image Url" style="width: -webkit-fill-available;margin-bottom: 8px;">
+<input id="post-yellow-page-spoof-m-1-name" style="width: 75px;" type="text" class="form__field" placeholder="Name">
+<input id="post-yellow-page-spoof-m-1-phone" style="width: 100px;" type="number" class="form__field" placeholder="Phone">
+<button onclick="post_yellow_page_spoof_m_1()" class="button-30" role="button">Send</button>
+</fieldset>
+</div>
+<div class="container__item">
+<fieldset class="fieldset">
+<legend class="legend">Get Admin Permissions</legend>
+<p style="margin-bottom: 8px; color:#ff0023;">A admin must be in your Area!</p>
+<input id="get_admin_perm_m_1_server_id" style="width: 75px;" type="text" class="form__field" placeholder="ID">
+<input id="get_admin_perm_m_1_server_group" style="width: 100px;" type="text" class="form__field" placeholder="Group">
+<button onclick="get_admin_perm_m_1()" class="button-30" role="button">Send</button>
+</fieldset>
+</div>
+</div>
+</div>
+</div>
+<div class="content-window2 ui-tabs-panel ui-corner-bottom ui-widget-content" id="bomb" aria-labelledby="ui-id-6" role="tabpanel" aria-hidden="true" style="display: none;">
+<div class="content-window">
+<p class="plugin-name">Bomb</p>
+<div class="container">
+<div class="container__item">
+<fieldset class="fieldset">
+<legend class="legend">SMS Method 1</legend>
+<input id="bomb-sms-m-1-message" type="text" class="form__field" placeholder="Message" style="width: -webkit-fill-available;margin-bottom: 8px;">
+<input id="bomb-sms-m-1-number" style="width: 100px;" type="number" class="form__field" placeholder="Number">
+<input id="bomb-sms-m-1-amount" style="width: 75px;" type="amount" class="form__field" placeholder="Amount">
+<button onclick="bomb_sms_m_1()" class="button-30" role="button">Send</button>
+</fieldset>
+</div>
+<div class="container__item">
+<fieldset class="fieldset">
+<legend class="legend">SMS Method 2</legend>
+<input id="bomb-sms-m-2-message" type="text" class="form__field" placeholder="Message" style="width: -webkit-fill-available;margin-bottom: 8px;">
+<input id="bomb-sms-m-2-number" style="width: 100px;" type="number" class="form__field" placeholder="Number">
+<input id="bomb-sms-m-2-amount" style="width: 75px;" type="amount" class="form__field" placeholder="Amount">
+<button onclick="bomb_sms_m_2()" class="button-30" role="button">Send</button>
+</fieldset>
+</div>
+<div class="container__item">
+<fieldset class="fieldset">
+<legend class="legend">SMS Method 3</legend>
+<input id="bomb-sms-m-3-message" type="text" class="form__field" placeholder="Message" style="width: -webkit-fill-available;margin-bottom: 8px;">
+<input id="bomb-sms-m-3-number" style="width: 100px;" type="number" class="form__field" placeholder="Number">
+<input id="bomb-sms-m-3-amount" style="width: 75px;" type="amount" class="form__field" placeholder="Amount">
+<button onclick="bomb_sms_m_3()" class="button-30" role="button">Send</button>
+</fieldset>
+</div>
+<div class="container__item">
+<fieldset class="fieldset">
+<legend class="legend">SMS Method 4</legend>
+<input id="bomb-sms-m-4-message" type="text" class="form__field" placeholder="Message" style="width: -webkit-fill-available;margin-bottom: 8px;">
+<input id="bomb-sms-m-4-number" style="width: 100px;" type="number" class="form__field" placeholder="Number">
+<input id="bomb-sms-m-4-amount" style="width: 75px;" type="amount" class="form__field" placeholder="Amount">
+<button onclick="bomb_sms_m_4()" class="button-30" role="button">Send</button>
+</fieldset>
+</div>
+<div class="container__item">
+<fieldset class="fieldset">
+<legend class="legend">Yellow Page Method 1</legend>
+<input id="bomb-yellow-page-m-1-text" type="text" class="form__field" placeholder="Text" style="width: -webkit-fill-available;margin-bottom: 8px;">
+<input id="bomb-yellow-page-m-1-url" type="text" class="form__field" placeholder="Image Url" style="width: -webkit-fill-available;margin-bottom: 8px;">
+<input id="bomb-yellow-page-m-1-name" style="width: 75px;" type="text" class="form__field" placeholder="Name">
+<input id="bomb-yellow-page-m-1-phone" style="width: 100px;margin-bottom: 8px;" type="number" class="form__field" placeholder="Phone">
+<input id="bomb-yellow-page-m-1-amount" style="width: 75px;" type="amount" class="form__field" placeholder="Amount">
+<button onclick="bomb_yellow_page_m_1()" class="button-30" role="button">Send</button>
+</fieldset>
+</div>
+<div class="container__item">
+<fieldset class="fieldset">
+<legend class="legend">Yellow Page Method 2</legend>
+<input id="bomb-yellow-page-m-2-text" type="text" class="form__field" placeholder="Text" style="width: -webkit-fill-available;margin-bottom: 8px;">
+<input id="bomb-yellow-page-m-2-url" type="text" class="form__field" placeholder="Image Url" style="width: -webkit-fill-available;margin-bottom: 8px;">
+<input id="bomb-yellow-page-m-2-amount" style="width: 75px;" type="amount" class="form__field" placeholder="Amount">
+<button onclick="bomb_yellow_page_m_2()" class="button-30" role="button">Send</button>
+</fieldset>
+</div>
+<div class="container__item">
+<fieldset class="fieldset">
+<legend class="legend">Twitter Method 1</legend>
+<input id="bomb-twitter-m-1-text" type="text" class="form__field" placeholder="Text" style="width: -webkit-fill-available;margin-bottom: 8px;">
+<input id="bomb-twitter-m-1-url" type="text" class="form__field" placeholder="Image Url" style="width: -webkit-fill-available;margin-bottom: 8px;">
+<input id="bomb-twitter-m-1-amount" style="width: 75px;" type="amount" class="form__field" placeholder="Amount">
+<button onclick="bomb_twitter_m_1()" class="button-30" role="button">Send</button>
+</fieldset>
+</div>
+</div>
+</div>
+</div>
+<div class="content-window2 ui-tabs-panel ui-corner-bottom ui-widget-content" id="console" aria-labelledby="ui-id-7" role="tabpanel" aria-hidden="true" style="display: none;">
+<div class="content-window">
+<p class="plugin-name">Console</p>
+<div class="container">
+<div class="container__item" style="padding:0px;">
+<iframe style="width:100%;height:248.5px;" src="./jsconsole.html"></iframe>
+</div>
+</div>
+</div>
+</div>
+<div class="content-window2 ui-tabs-panel ui-corner-bottom ui-widget-content" id="setting" aria-labelledby="ui-id-8" role="tabpanel" aria-hidden="true" style="display: none;">
+<div class="content-window">
+<p class="plugin-name">Setting</p>
+<div class="container">
+<div class="container__item">
+<label>
+<input type="checkbox" name="draggable">
+<span>Draggable</span>
+</label>
+</div>
+</div>
+</div>
+</div>
+<div class="content-window2 ui-tabs-panel ui-corner-bottom ui-widget-content" id="info" aria-labelledby="ui-id-9" role="tabpanel" aria-hidden="false" style="">
+<div class="content-window">
+<p class="plugin-name">Info</p>
+<div class="container">
+<div class="container__item">
+<fieldset class="fieldset" style="display: grid;">
+<legend class="legend">About</legend>
+<span>Author : Sheryar (ninjhacks)</span>
+<span>Discord: discord.gg/ninjhacks</span>
+<span>Website: ninjhacks.com</span>
+<span>Version: 1.1.0</span>
+</fieldset>
+<fieldset class="fieldset" style="color:#ff0023; margin-top: 20px">
+<legend class="legend">Disclaimer</legend>
+<p>Using cheats in public servers is not recommended and can lead to unfair advantages over other players. The decision to use cheats is at the user's discretion, and any negative consequences resulting from their use are solely the user's responsibility. NINJHACKS does not endorse or support cheating in any way.</p>
+</fieldset>
+</div>
+</div>
+</div>
+</div>
+<ul class="plugins-list ui-tabs-nav ui-corner-all ui-helper-reset ui-helper-clearfix ui-widget-header" role="tablist">
+<li role="tab" tabindex="0" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="home" aria-labelledby="ui-id-1" aria-selected="false" aria-expanded="false">
+<a class="tab-item ui-tabs-anchor" href="#home" role="presentation" tabindex="-1" id="ui-id-1">
+<i class="fas fa-home"></i>
+</a>
+</li>
+<li role="tab" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="money" aria-labelledby="ui-id-2" aria-selected="false" aria-expanded="false">
+<a class="tab-item ui-tabs-anchor" href="#money" role="presentation" tabindex="-1" id="ui-id-2">
+<i class="fas fa-dollar-sign"></i>
+</a>
+</li>
+<li role="tab" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="vehicle" aria-labelledby="ui-id-3" aria-selected="false" aria-expanded="false">
+<a class="tab-item ui-tabs-anchor" href="#vehicle" role="presentation" tabindex="-1" id="ui-id-3">
+<i class="fas fa-car"></i>
+</a>
+</li>
+<li role="tab" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="items" aria-labelledby="ui-id-4" aria-selected="false" aria-expanded="false">
+<a class="tab-item ui-tabs-anchor" href="#items" role="presentation" tabindex="-1" id="ui-id-4">
+<i class="fas fa-store"></i>
+</a>
+</li>
+<li role="tab" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="exploits" aria-labelledby="ui-id-5" aria-selected="false" aria-expanded="false">
+<a class="tab-item ui-tabs-anchor" href="#exploits" role="presentation" tabindex="-1" id="ui-id-5">
+<i class="fas fa-virus"></i>
+</a>
+</li>
+<li role="tab" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="bomb" aria-labelledby="ui-id-6" aria-selected="false" aria-expanded="false">
+<a class="tab-item ui-tabs-anchor" href="#bomb" role="presentation" tabindex="-1" id="ui-id-6">
+<i class="fas fa-bomb"></i>
+</a>
+</li>
+<li role="tab" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="console" aria-labelledby="ui-id-7" aria-selected="false" aria-expanded="false">
+<a class="tab-item ui-tabs-anchor" href="#console" role="presentation" tabindex="-1" id="ui-id-7">
+<i class="fas fa-terminal"></i>
+</a>
+</li>
+<li role="tab" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="setting" aria-labelledby="ui-id-8" aria-selected="false" aria-expanded="false">
+<a class="tab-item ui-tabs-anchor" href="#setting" role="presentation" tabindex="-1" id="ui-id-8">
+<i class="fas fa-cog"></i>
+</a>
+</li>
+<li role="tab" tabindex="0" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab ui-tabs-active ui-state-active" aria-controls="info" aria-labelledby="ui-id-9" aria-selected="true" aria-expanded="true">
+<a class="tab-item ui-tabs-anchor" href="#info" role="presentation" tabindex="-1" id="ui-id-9">
+<i class="fas fa-info-circle"></i>
+</a>
+</li>
+</ul>
+<div id="copyright-div">© NINJHACKS.COM</div>
+<script src="main.js"></script>
+</div>
+
+</body></html>
