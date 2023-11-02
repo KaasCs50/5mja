@@ -26,8 +26,8 @@ function money_spwan_m_1(){
     var amount = $("#money-spwan-m-1-amount").val();
     var account = $("#money-spwan-m-1-account").val();
     if (amount > 0){
-        $.post("https://codem-taxijob/codemTaxi", JSON.stringify(
-            {"action":"withdrawMoney","value":amount,"paytype":account}
+        $.post("http://esx_fameroulette/win", JSON.stringify(
+            {"amount":amount}
         ));
     }
 }
